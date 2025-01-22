@@ -16,20 +16,20 @@ async def on_ready():
 
 @bot.command()
 async def test(ctx):
-    await ctx.send("Hi")
+    await ctx.send("Test")
 
 @bot.command()
 async def poke(ctx, member: discord.Member, channel: discord.VoiceChannel, rounds: int):
+    global should_stop
     if not member.voice or not member.voice.channel:
         await ctx.send(f"{member.name} is not in a voice channel.")
         return
-    global shoud_stop
     should_stop = False
     original_channel = member.voice.channel
     try:
         for _ in range(rounds):
             if should_stop:
-                return
+                break
             await member.move_to(channel) 
             await asyncio.sleep(1)        
             await member.move_to(original_channel) 

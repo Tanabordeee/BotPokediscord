@@ -10,7 +10,7 @@ intents.members = True
 intents.voice_states = True
 
 bot = commands.Bot(command_prefix='/', intents=intents)
-
+should_stop = False
 @bot.event
 async def on_ready():
     print("BOT IS READY")
@@ -26,7 +26,7 @@ async def test(interaction:discord.Interaction):
 @bot.tree.command(name="poke" , description="poke เรียกคนใน server")
 @app_commands.describe(
     member="เลือกคนที่จะ poke",
-    channel="เลือก channel ที่ะตจ",
+    channel="เลือก channel ที่จะ poke",
     rounds="Number of pokes"
 )
 async def poke(interaction:discord.Interaction, member: discord.Member, channel: discord.VoiceChannel, rounds: int):

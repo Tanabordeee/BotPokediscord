@@ -13,7 +13,6 @@ intents.voice_states = True
 
 bot = commands.Bot(command_prefix='/', intents=intents)
 should_stop = False
-
 @bot.event
 async def on_ready():
     print("BOT IS READY")
@@ -30,7 +29,7 @@ async def test(interaction: discord.Interaction):
 @bot.tree.command(name="poke", description="poke เรียกคนใน server")
 @app_commands.describe(
     member="เลือกคนที่จะ poke",
-    channel="เลือก channel ที่ะตจ",
+    channel="เลือก channel ที่จะ poke",
     rounds="Number of pokes"
 )
 async def poke(interaction: discord.Interaction, member: discord.Member, channel: discord.VoiceChannel, rounds: int):
@@ -109,10 +108,6 @@ async def stoppoke(interaction: discord.Interaction):
     should_stop = True
     await interaction.response.send_message("Poke has been stopped")
 
-@bot.tree.command(name="rebot", description="รีสตาร์ทบอท")
-async def rebot(interaction: discord.Interaction):
-    await interaction.response.send_message("กำลังรีสตาร์ทบอท...", ephemeral=True)
-    os.execv(sys.executable, ['python'] + sys.argv)
 
 token = os.environ['DISCORD_TOKEN']
 bot.run(token)
